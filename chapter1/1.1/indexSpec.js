@@ -1,5 +1,5 @@
 describe("Chapter 1.1", function() {
-  var solution = require('./1.1');
+  var solution = require('./index');
 
   it("empty string should return false", function() {
     expect(solution('')).toBe(false);
