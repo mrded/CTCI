@@ -11,7 +11,7 @@ describe("Chapter 1.2", function() {
     expect(solution("foo", "foo")).toBe(true);
     expect(solution("foo", "ofo")).toBe(true);
     expect(solution("foo", "oof")).toBe(true);
-    expect(solution('', '')).toBe(false);
+    expect(solution('', '')).toBe(true);
   });
 
   it("strings with different length should return false", function() {

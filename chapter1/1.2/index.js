@@ -4,10 +4,15 @@
 //
 // Permission of a string has length! variants.
 //
-// #1:
+// #1: hash tables
 // #84: O(N log N) time || O(N) time and more space
 // #122: hash table
-// #131: 
+// #131: sort strings 
+
+var sort = function(text) {
+  // @TODO: Possible refactor sort.
+  return text.split('').sort().join('');
+};
 
 module.exports = function(one, two) {
   if (one === two) {
@@ -22,8 +27,9 @@ module.exports = function(one, two) {
     return false;
   }
 
-  //@TODO: Sort one & two
-  //@TODO: If sorted strings equal - return true
+  if (sort(one) === sort(two)) {
+    return true; 
+  }
 
   return false;
 };
