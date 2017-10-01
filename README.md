@@ -1,6 +1,5 @@
 # CTCI
-
-##Index
+* [Linked Lists](#linked-lists)
 * [Data Structures](#data-structures)
   * [Arrays and Strings](#arrays-and-strings)
   
