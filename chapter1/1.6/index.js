@@ -5,6 +5,6 @@
 // your method should return the original string. 
 // You can assume the string has only uppercase and lowercase letters (a-z).
 
-module.exports = function() {
-  return false;
+module.exports = function(string) {
+  return string;
 };
