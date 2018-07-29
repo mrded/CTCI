@@ -1,13 +1,12 @@
 module.exports = function(array) {
   const output = array.slice();
 
-  let length = array.length;
-
   // To count how many iteraions.
   let iterations = 0;
 
-  for (let i=0; i<length; i++) {
-    for (let j=0; j<length; j++) {
+  for (let i = 0; i < array.length; i++) { // O(n) 
+    // No needs to check last element, because it will be max already.
+    for (let j = 0; j+i < array.length; j++) { // O(n-i); i = (n-1) + (n-2) + (n-n)
       iterations++;
 
       const x = output[j];
@@ -18,9 +17,6 @@ module.exports = function(array) {
         output[j+1] = x;
       }
     }
-
-    // No needs to check last element, because it will be max already.
-    length--;
   }
 
   // console.log(array, 'iterations:', iterations);
