@@ -23,15 +23,21 @@ module.exports = function(fn) {
     expect(fn(array)).toEqual([1, 2, 3]);
   });
 
-  it('random order', function() {
-    const array = [2, 3, 1];
-  
-    expect(fn(array)).toEqual([1, 2, 3]);
-  });
-
   it('contain duplicates', function() {
     const array = [2, 3, 1, 3, 1];
   
     expect(fn(array)).toEqual([1, 1, 2, 3, 3]);
+  });
+
+  it('odd number of elements in array', function() {
+    const array = [2, 3, 1, 5, 4];
+  
+    expect(fn(array)).toEqual([1, 2, 3, 4, 5]);
+  });
+
+  it('even number of elements in array', function() {
+    const array = [2, 3, 1, 4];
+  
+    expect(fn(array)).toEqual([1, 2, 3, 4]);
   });
 }
