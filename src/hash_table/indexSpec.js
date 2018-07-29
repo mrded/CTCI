@@ -17,14 +17,14 @@ describe("Test Hash Table module", function() {
   
   it("previous value of key 'foo'", function() {
     expect(h.setItem('foo', 'bar')).toBe(undefined);
+  });
 
-    it("length after setItem", function() {
-      expect(h.length).toBe(5);
-    });
+  it("length after setItem", function() {
+    expect(h.length).toBe(5);
+  });
 
-    it("value of key 'foo'", function() {
-      expect(h.getItem('foo')).toBe('bar');
-    });
+  it("value of key 'foo'", function() {
+    expect(h.getItem('foo')).toBe('bar');
   });
 
   it('value of key "i\'m no 4"', function() {
