@@ -1,17 +1,21 @@
 module.exports = function(array) {
-  let iterations = 0;
+  const output = array.slice();
+
   let length = array.length;
 
-  for (i=0; i<length; i++) {
-    for (j=0; j<length; j++) {
+  // To count how many iteraions.
+  let iterations = 0;
+
+  for (let i=0; i<length; i++) {
+    for (let j=0; j<length; j++) {
       iterations++;
 
-      const x = array[j];
-      const y = array[j+1];
+      const x = output[j];
+      const y = output[j+1];
 
       if (x > y) {
-        array[j] = y;
-        array[j+1] = x;
+        output[j] = y;
+        output[j+1] = x;
       }
     }
 
@@ -19,8 +23,7 @@ module.exports = function(array) {
     length--;
   }
 
-  console.log('length', array.length);
-  console.log('iterations', iterations);
+  // console.log(array, 'iterations:', iterations);
 
-  return array;
+  return output;
 }
