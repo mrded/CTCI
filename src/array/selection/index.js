@@ -22,7 +22,7 @@ module.exports = function(array) {
     output[i] = min;
   }
   
-  console.log(array, 'iterations:', iterations);
+  // console.log(array, 'iterations:', iterations);
 
   return output;
 }
