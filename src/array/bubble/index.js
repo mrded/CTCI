@@ -22,10 +22,7 @@ module.exports = function(array) {
     }
 
     // If no swaps - return, because it's already sorted.
-    if (swaps === 0) {
-      // console.log(array, 'iterations:', iterations);
-      return output;
-    }
+    if (swaps === 0) break;
   }
 
   // console.log(array, 'iterations:', iterations);
