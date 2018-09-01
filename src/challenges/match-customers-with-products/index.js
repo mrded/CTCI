@@ -88,11 +88,11 @@ function ss(customer, product) {
     return ss;
 }
 
-function Matrix(i, j) {
+function Matrix(height, width) {
     this.matrix = [];
     
-    for (let x = 0; x < i; x++) {
-        this.matrix[x] = Array(j);
+    for (let i = 0; i < height; i++) {
+        this.matrix[i] = Array(width);
     }
 }
 
@@ -110,6 +110,18 @@ Matrix.prototype.getHeight = function() {
 
 Matrix.prototype.getWidth = function() {
     return this.matrix[0].length;
+}
+
+Matrix.prototype.rotate = function() {
+    const newMatrix = new Matrix(this.getWidth(), this.getHeight());
+    
+    for (let i = 0; i < this.getWidth(); i++) {
+        for (let j = 0; j < this.getHeight(); j++) {
+            newMatrix.set(i, j, this.get(j, i));
+        }
+    }
+    
+    return newMatrix;
 }
 
 Matrix.prototype.minor = function(i, j) {
@@ -135,6 +147,12 @@ Matrix.prototype.minor = function(i, j) {
 
 Matrix.prototype.findMaxCombination = function() {
     const height = this.getHeight();
+    const width = this.getWidth();
+    
+    if (height > width) {
+        // The algorithm is iterating height, it supposed to be smaller.
+        return this.rotate().findMaxCombination();
+    }
     
     if (height === 1) {
         // In case only one row left - return max column.
@@ -154,8 +172,6 @@ Matrix.prototype.findMaxCombination = function() {
 }
 
 function populateMatrix(customers, products) {
-    //@TODO: Note that there may be a different number of products and customers.
-    
     const matrix = new Matrix(customers.length, products.length);
 
     // Populate matrix.
@@ -182,13 +198,8 @@ process.stdin.on('data', function(chunk) {
         
         const matrix = populateMatrix(customers, products);
 
-        // console.log('Matrix:', matrix.matrix);
+        console.log('Matrix:', matrix.matrix);
         
-        if (customers.length >= products.length) {
-            process.stdout.write(matrix.findMaxCombination().toFixed(2))
-        }
-        else {
-            process.stdout.write('0')
-        }
+        process.stdout.write(matrix.findMaxCombination().toFixed(2))
     }
 });
