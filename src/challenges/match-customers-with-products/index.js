@@ -133,6 +133,26 @@ Matrix.prototype.minor = function(i, j) {
     return newMatrix;
 }
 
+Matrix.prototype.findMaxCombination = function() {
+    const height = this.getHeight();
+    
+    if (height === 1) {
+        // In case only one row left - return max column.
+        return Math.max.apply(null, this.matrix[0]);
+    }
+    
+    const values = [];
+    
+    for (let i = 0; i < height; i++) {
+        const minorMatrix = this.minor(i, 0);
+        
+        // Current value + next max value.
+        values.push(this.get(i, 0) + minorMatrix.findMaxCombination());
+    }
+    
+    return Math.max.apply(null, values);
+}
+
 function populateMatrix(customers, products) {
     //@TODO: Note that there may be a different number of products and customers.
     
@@ -148,23 +168,6 @@ function populateMatrix(customers, products) {
     return matrix;
 }
 
-function findMax(matrix) {
-    if (matrix.getHeight() === 1) return matrix.get(0, 0);
-    
-    const values = [];
-    
-    for (let i = 0; i < matrix.getHeight(); i++) {
-        const minorMatrix = matrix.minor(i, 0);
-        
-        // Current value + next max value.
-        values.push(matrix.get(i, 0) + findMax(minorMatrix));
-    }
-    
-    console.log('values', values);
-    
-    return Math.max.apply(null, values);
-}
-
 var stdin = '';
 process.stdin.on('data', function(chunk) {
     stdin += chunk;
@@ -177,18 +180,15 @@ process.stdin.on('data', function(chunk) {
         const customers = split[0].split(',');
         const products = split[1].split(',');
         
-        // console.log('::', customers, products);
-        
         const matrix = populateMatrix(customers, products);
 
-        console.log('Matrix:', matrix.matrix);
-        
+        // console.log('Matrix:', matrix.matrix);
         
         if (customers.length >= products.length) {
-            process.stdout.write(findMax(matrix).toString());
+            process.stdout.write(matrix.findMaxCombination().toFixed(2))
         }
         else {
-            process.stdout.write('0');
+            process.stdout.write('0')
         }
     }
 });
