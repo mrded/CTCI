@@ -90,9 +90,49 @@ describe('Matrix', function() {
   });
   
   describe('minor', () => {
-    it('should be able to minor 3x3 matrix');
-    it('should be able to minor 2x3 matrix');
-    it('should be able to minor 3x2 matrix');
+    it('should be able to minor 3x3 matrix', () => {
+      const matrix = new Matrix(3, 3);
+
+      matrix.matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+      ];
+
+      const output = matrix.minor(1, 1);
+
+      expect(output.matrix).toEqual([
+        [1, 3],
+        [7, 9]
+      ]);
+    });
+
+    it('should be able to minor 2x3 matrix', () => {
+      const matrix = new Matrix(2, 3);
+
+      matrix.matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+      ];
+
+      const output = matrix.minor(1, 1);
+
+      expect(output.matrix).toEqual([ [1, 3] ]);
+    });
+
+    it('should be able to minor 3x2 matrix', () => {
+      const matrix = new Matrix(3, 2);
+
+      matrix.matrix = [
+        [2, 3],
+        [5, 6],
+        [8, 9]
+      ];
+
+      const output = matrix.minor(1, 1);
+
+      expect(output.matrix).toEqual([ [2], [8] ]);
+    });
   });
 
   describe('findMaxCombination', () => {
