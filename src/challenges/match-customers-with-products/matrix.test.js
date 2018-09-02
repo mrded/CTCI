@@ -5,8 +5,8 @@ describe('Matrix', function() {
     it('can get size', () => {
       const matrix = new Matrix(3, 4);
 
-      expect(matrix.getHeight()).toBe(3);
-      expect(matrix.getWidth()).toBe(4);
+      expect(matrix.height).toBe(3);
+      expect(matrix.width).toBe(4);
     });
   });
 
