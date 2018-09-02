@@ -72,12 +72,14 @@ Matrix.prototype.findMaxCombination = function() {
     const values = [];
     
     for (let i = 0; i < height; i++) {
-        const minorMatrix = this.minor(i, 0);
+      for (let j = 0; j < width; j++) {
+        const minorMatrix = this.minor(i, j);
         
         // Current value + next max value.
-        values.push(this.get(i, 0) + minorMatrix.findMaxCombination());
+        values.push(this.get(i, j) + minorMatrix.findMaxCombination());
+      }
     }
-    
+
     return Math.max.apply(null, values);
 }
 
