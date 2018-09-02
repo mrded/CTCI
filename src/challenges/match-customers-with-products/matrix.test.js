@@ -136,9 +136,58 @@ describe('Matrix', function() {
   });
 
   describe('findMaxCombination', () => {
-    it('3x3 matrix');
-    it('2x3 matrix');
-    it('3x2 matrix');
-    it('1x1 matrix');
+    it('3x3 matrix', () => {
+      const matrix = new Matrix(3, 3);
+
+      matrix.matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+      ];
+
+      expect(matrix.findMaxCombination()).toBe(9+5+1);
+    });
+
+    it('2x3 matrix - variant 1', () => {
+      const matrix = new Matrix(2, 3);
+
+      matrix.matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+      ];
+
+      expect(matrix.findMaxCombination()).toBe(6+2);
+    });
+
+    it('2x3 matrix - variant 2', () => {
+      const matrix = new Matrix(2, 3);
+
+      matrix.matrix = [
+        [5, 3, 1],
+        [6, 4, 2],
+      ];
+
+      expect(matrix.findMaxCombination()).toBe(6+3);
+    });
+
+    it('3x2 matrix', () => {
+      const matrix = new Matrix(3, 2);
+
+      matrix.matrix = [
+        [1, 2],
+        [3, 4],
+        [5, 6]
+      ];
+
+      expect(matrix.findMaxCombination()).toBe(6+3);
+    });
+
+    it('1x1 matrix', () => {
+      const matrix = new Matrix(1, 1);
+
+      matrix.matrix = [ [42] ];
+
+      expect(matrix.findMaxCombination()).toBe(42);
+    });
   });
 });
