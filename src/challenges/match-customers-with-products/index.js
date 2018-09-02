@@ -1,25 +1,20 @@
 const Matrix = require('./matrix');
+const Word = require('./word');
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
-function countLetters(word, dict) {
-    let count = 0;
-    
-    // Count letters mach dictionary.
-    for (let letter of word) {
-        if (dict.indexOf(letter) !== -1) count++;   
-    }
-    
-    return count;
-}
+function populateMatrix(customers, products) {
+    const matrix = new Matrix(customers.length, products.length);
 
-function cleanUp(word) {
-    // Delete everything but letters, and make it lower case.
-    return word
-        .match(/[a-z]/gi)
-        .join('')
-        .toLowerCase();
+    // Populate matrix.
+    for (let i = 0; i < customers.length; i++) {
+        for (let j = 0; j < products.length; j++) {
+            matrix.set(i, j, ss(customers[i], products[j]));
+        }
+    }
+
+    return matrix;
 }
 
 // O(n)
@@ -52,32 +47,23 @@ function doesShareCommons(a, b) {
 function ss(customer, product) {
     let ss = 0;
     
-    const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
-    const consonants = [
-        'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 
-        'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'x', 'z'
-    ];
-    
-    const customerClean = cleanUp(customer);
-    const productClean = cleanUp(product);
-
-    if (productClean.length % 2 === 0) {
+    if (product.letters % 2 === 0) {
         // If the number of letters in the product's name is even
         // then the SS is the number of vowels (a, e, i, o, u, y)
         // in the customer's name multiplied by 1.5. 
         
-        ss = countLetters(customerClean, vowels) * 1.5;
+        ss = customer.vowels * 1.5;
     }
     else {
         // If the number of letters in the product's name is odd
         // then the SS is the number of consonants in the customer's name. 
         
-        ss = countLetters(customerClean, consonants);
+        ss = customer.consonants;
     }
     
     // if shares any common factors but '1'.
-    const customerFactors = getFactors(customerClean.length);
-    const productFactors = getFactors(productClean.length);
+    const customerFactors = getFactors(customer.letters);
+    const productFactors = getFactors(product.letters);
 
     if (doesShareCommons(customerFactors, productFactors)) {
         // If the number of letters in the product's name shares any common
@@ -90,19 +76,6 @@ function ss(customer, product) {
     return ss;
 }
 
-function populateMatrix(customers, products) {
-    const matrix = new Matrix(customers.length, products.length);
-
-    // Populate matrix.
-    for (let i = 0; i < customers.length; i++) {
-        for (let j = 0; j < products.length; j++) {
-            matrix.set(i, j, ss(customers[i], products[j]));
-        }
-    }
-
-    return matrix;
-}
-
 var stdin = '';
 process.stdin.on('data', function(chunk) {
     stdin += chunk;
@@ -112,12 +85,10 @@ process.stdin.on('data', function(chunk) {
     for (let line of lines) {
         const split = line.split(';');
         
-        const customers = split[0].split(',');
-        const products = split[1].split(',');
+        const customers = split[0].split(',').map(x => new Word(x));
+        const products = split[1].split(',').map(x => new Word(x));
         
         const matrix = populateMatrix(customers, products);
-
-        console.log('Matrix:', matrix.matrix);
         
         process.stdout.write(matrix.findMaxCombination().toFixed(2))
     }
