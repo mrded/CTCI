@@ -22,18 +22,6 @@ Matrix.prototype.getWidth = function() {
     return this.matrix[0].length;
 }
 
-Matrix.prototype.rotate = function() {
-    const newMatrix = new Matrix(this.getWidth(), this.getHeight());
-    
-    for (let i = 0; i < this.getHeight(); i++) {
-        for (let j = 0; j < this.getWidth(); j++) {
-            newMatrix.set(j, newMatrix.getWidth() - 1 - i, this.get(i, j));
-        }
-    }
-    
-    return newMatrix;
-}
-
 Matrix.prototype.minor = function(i, j) {
     // Create a new matrix without deleted column & row.
     const newMatrix = new Matrix(this.getHeight() - 1, this.getWidth() - 1);
@@ -59,16 +47,16 @@ Matrix.prototype.findMaxCombination = function() {
     const height = this.getHeight();
     const width = this.getWidth();
     
-    if (height > width) {
-        // The algorithm is iterating height, it supposed to be smaller.
-        return this.rotate().findMaxCombination();
-    }
-    
     if (height === 1) {
         // In case only one row left - return max column.
         return Math.max.apply(null, this.matrix[0]);
     }
-    
+
+    if (width === 1) {
+        // In case only one column left - return max row.
+        return Math.max.apply(null, this.matrix.map(x => x[0]));
+    }
+
     const values = [];
     
     for (let i = 0; i < height; i++) {
