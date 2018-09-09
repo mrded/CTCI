@@ -1,0 +1,14 @@
+{
+  "name": "array-sort",
+  "version": "1.0.0",
+  "description": "",
+  "main": "spec.js",
+  "scripts": {
+    "test": "jasmine ./**/*.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^3.2.0"
+  }
+}
