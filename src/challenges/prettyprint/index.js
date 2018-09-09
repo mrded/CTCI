@@ -11,15 +11,16 @@ module.exports = {
       output[i] = Array(size);
     }
 
-    // @TODO: 1. Draw 1/4 and mirrow.
+    // Draw 1/4 and mirrow.
     for (var i = 0; i<A; i++) {
       for (var j = 0; j<A; j++) {
-        output[i][j] = (i < j) ? A-i : A-j;
+        var value = (i < j) ? A-i : A-j;
 
         // Mirror.
-
-
-
+        output[i][j] = value;
+        output[i][2*A-j-2] = value;
+        output[2*A-i-2][j] = value;
+        output[2*A-i-2][2*A-j-2] = value;
       }
     }
 
