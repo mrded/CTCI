@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jasmine"
   },
-  "author": "Dmitry Demenchuk @mrded",
+  "author": "Dmitry Demenchuk @mrded (dmitry@demenchuk.me)",
   "license": "ISC",
   "dependencies": {
     "jasmine": "^2.9.0"
