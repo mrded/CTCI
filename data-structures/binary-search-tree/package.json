@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine ./*.test.js"
+    "test": "jasmine ./tests"
   },
   "author": "Dmitry Demenchuk @mrded (dmitry@demenchuk.me)",
   "license": "ISC",

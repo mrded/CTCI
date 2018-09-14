@@ -1,14 +1,6 @@
-const Node = require('./index.js');
+const Node = require('../index.js');
 
-describe("Binary search tree", () => {
-  it('new', () => {
-    const node = new Node(42);
-
-    expect(node.data).toBe(42);
-    expect(node.left).toBe(null);
-    expect(node.right).toBe(null);
-  });
-
+module.exports = function() {
   describe('insert', () => {
     let node;
 
@@ -37,7 +29,7 @@ describe("Binary search tree", () => {
         expect(node.right.data).toBe(6);
         expect(node.left).toBe(null);
       });
-    
+
     });
 
     describe('grand child', () => {
@@ -66,4 +58,4 @@ describe("Binary search tree", () => {
       });
     });
   });
-});
+}
