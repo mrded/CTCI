@@ -1,6 +1,6 @@
-describe("Test Hash Table module", function() {
-  var HashTable = require('./index');
+const HashTable = require('./index');
 
+describe("Test Hash Table", function() {
   var h = new HashTable({one: 1, two: 2, three: 3, "i'm no 4": 4});
 
   it("original length", function() {

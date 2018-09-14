@@ -1,6 +1,6 @@
-describe("Test Priority Queue module", function() {
-  var PriorityQueue = require('./index');
+const PriorityQueue = require('./index');
 
+describe("Test Priority Queue", function() {
   it("extract minimum value", function() {
     var queue = new PriorityQueue();
 

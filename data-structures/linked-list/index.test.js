@@ -1,6 +1,6 @@
-describe("Test Linked List module", function() {
-  var LinkedList = require('./index');
+const LinkedList = require('./index');
 
+describe("Test Linked List", function() {
   var list = new LinkedList();
 
   list.insert(1);
