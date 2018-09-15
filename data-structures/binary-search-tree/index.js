@@ -34,6 +34,16 @@ class BST extends Node {
   
     return null;
   } 
+
+  min() {
+    return (this.left === null) 
+      ? this : this.left.min();
+  }
+
+  max() {
+    return (this.right === null) 
+      ? this : this.right.max();
+  }
 }
 
 module.exports = BST;
