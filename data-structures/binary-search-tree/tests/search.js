@@ -14,16 +14,12 @@ module.exports = function() {
 
     it('should be able to find all elements', () => {
       for (let value of values) {
-        const output = node.find(value);
-
-        expect(output.data).toBe(value);
+        expect(node.find(value).data).toBe(value);
       }
     });
 
     it('should not be able to find an element which doesn\'t exist', () => {
-      const output = node.find(24);
-
-      expect(output).toBe(null);
+      expect(node.find(24)).toBe(null);
     })
   });
 }

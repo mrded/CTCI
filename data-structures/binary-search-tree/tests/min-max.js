@@ -14,26 +14,22 @@ module.exports = function() {
   describe('min', () => {
     it('of one', () => {
       const node = new Node(42);
-      const output = node.min();
-      expect(output.data).toBe(42);
+      expect(node.min().data).toBe(42);
     });
 
     it('of many', () => {
-      const output = node.min();
-      expect(output.data).toBe(2);
+      expect(node.min().data).toBe(2);
     });
   });
 
   describe('max', () => {
     it('of one', () => {
       const node = new Node(42);
-      const output = node.max();
-      expect(output.data).toBe(42);
+      expect(node.max().data).toBe(42);
     });
 
     it('of many', () => {
-      const output = node.max();
-      expect(output.data).toBe(22);
+      expect(node.max().data).toBe(22);
     });
   });
 }
