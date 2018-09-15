@@ -1,6 +1,9 @@
 const Node = require('../index.js');
 
 const insertSpec = require('./insert');
+const searchSpec = require('./search');
+const deleteSpec = require('./delete');
+const minMaxSpec = require('./min-max');
 
 describe("Binary search tree", () => {
   it('new', () => {
@@ -12,4 +15,7 @@ describe("Binary search tree", () => {
   });
 
   insertSpec();
+  searchSpec();
+  deleteSpec();
+  minMaxSpec();
 });
