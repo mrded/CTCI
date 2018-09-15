@@ -20,6 +20,20 @@ class BST extends Node {
       }
     }
   }
+
+  find(data) {
+    if (data === this.data) {
+      return this;
+    }
+    else if (data > this.data && this.right) {
+      return this.right.find(data);
+    }
+    else if (data < this.data && this.left) {
+      return this.left.find(data);
+    }
+  
+    return null;
+  } 
 }
 
 module.exports = BST;
