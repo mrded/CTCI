@@ -73,12 +73,12 @@ class BST extends Node {
   } 
 
   min() {
-    return (this.left === null) 
+    return (!this.left) 
       ? this : this.left.min();
   }
 
   max() {
-    return (this.right === null) 
+    return (!this.right) 
       ? this : this.right.max();
   }
 
