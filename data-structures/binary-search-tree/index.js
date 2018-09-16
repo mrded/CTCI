@@ -83,8 +83,19 @@ class BST extends Node {
   }
 
   traversalLevelOrder() {
-    throw new Error('Is not emplemented yet');
-    return [];
+    const queue = [this];
+    const output = [];
+
+    while (queue.length > 0) {
+      const node = queue.shift();
+
+      output.push(node.data);
+
+      node.left && queue.push(node.left); 
+      node.right && queue.push(node.right); 
+    }
+
+    return output;
   }
 }
 
