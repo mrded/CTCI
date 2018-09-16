@@ -9,6 +9,14 @@ const values = [12, 5, 20, 2, 6, 15, 22, 1, 16];
 //  /        \
 // 1          16
 
+function validate(node, min, max) {
+  if (node === null) return true;
+
+  return (node.data > min) && (node.data < max)
+    && validate(node.left, min, node.data)
+    && validate(node.right, node.data, max);
+}
+
 function deleteSpec(node, data) {
   // console.log('before', node);
   node.delete(data);
@@ -21,28 +29,7 @@ function deleteSpec(node, data) {
     expect(node.find(value).data).toBe(value);
   }
 
-  expect(validateSpec(node)).toBe(true);
-}
-
-function validateSpec(node) {
-  if (!node.right && !node.left) {
-    return true;
-  }
-
-  // One child.
-  else if (!node.left && node.right && (node.data < node.right.data)) {
-    return validateSpec(node.right);
-  }
-  else if (!node.right && node.left && (node.data > node.left.data)) {
-    return validateSpec(node.left);
-  }
-
-  // Two children.
-  else if ((node.data < node.right.data) && (node.data > node.left.data)) {
-    return validateSpec(node.right) && validateSpec(node.left);
-  }
-
-  return false;
+  expect(validate(node, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)).toBe(true);
 }
 
 module.exports = function() {
