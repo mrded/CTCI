@@ -13,8 +13,6 @@ function deleteSpec(node, data) {
   // console.log('before', node);
   node.delete(data);
 
-  // console.log('after', node);
-
   // Requested item must be deleted.
   expect(node.find(data)).toBe(null);
 
@@ -22,10 +20,33 @@ function deleteSpec(node, data) {
   for (let value of values.filter(x => x !== data)) {
     expect(node.find(value).data).toBe(value);
   }
+
+  expect(validateSpec(node)).toBe(true);
+}
+
+function validateSpec(node) {
+  if (!node.right && !node.left) {
+    return true;
+  }
+
+  // One child.
+  else if (!node.left && node.right && (node.data < node.right.data)) {
+    return validateSpec(node.right);
+  }
+  else if (!node.right && node.left && (node.data > node.left.data)) {
+    return validateSpec(node.left);
+  }
+
+  // Two children.
+  else if ((node.data < node.right.data) && (node.data > node.left.data)) {
+    return validateSpec(node.right) && validateSpec(node.left);
+  }
+
+  return false;
 }
 
 module.exports = function() {
-  fdescribe('delete', () => {
+  describe('delete', () => {
     let node;
 
     beforeEach(() => {
