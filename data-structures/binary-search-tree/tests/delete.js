@@ -1,45 +1,49 @@
 const Node = require('../index.js');
 
+const values = [12, 5, 20, 2, 6, 15, 22, 1, 16];
+//       12
+//      /  \
+//     5    20
+//    /\    /\
+//   2  6  15  22
+//  /        \
+// 1          16
+
+function deleteSpec(node, data) {
+  // console.log('before', node);
+  node.delete(data);
+
+  // console.log('after', node);
+
+  // Requested item must be deleted.
+  expect(node.find(data)).toBe(null);
+
+  // Other items should still be there.
+  for (let value of values.filter(x => x !== data)) {
+    expect(node.find(value).data).toBe(value);
+  }
+}
+
 module.exports = function() {
-  describe('delete', () => {
+  fdescribe('delete', () => {
     let node;
-    const values = [5, 20, 2, 6, 15, 22, 1, 16];
 
     beforeEach(() => {
       node = new Node(12);
-      //       12
-      //      /  \
-      //     5    20
-      //    /\    /\
-      //   2  6  15  22
-      //  /        \
-      // 1          16
 
       values.map(node.insert.bind(node));
     });
 
-    it('a node without children', () => {
-      node.delete(1);
+    it('a node without children', () => deleteSpec(node, 16));
 
-      expect(node.find(22)).toBe(null);
-    });
+    it('a node one child', () => deleteSpec(node, 15));
 
-    it('a node one child', () => {
-      node.delete(15);
+    it('a node two children', () => deleteSpec(node, 20));
 
-      expect(node.find(15)).toBe(null);
-    });
+    it('root', () => deleteSpec(node, node.data));
 
-    it('a node two children', () => {
-      node.delete(20);
-
-      expect(node.find(20)).toBe(null);
-    });
-
-    it('root', () => {
-      node.delete(node.data);
-
-      expect(node.find(node.data)).toBe(null);
-    });
+    for (let value of values) {
+      it(value, () => deleteSpec(node, value));
+    }
   });
 }
