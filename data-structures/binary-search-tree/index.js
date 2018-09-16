@@ -57,6 +57,35 @@ class BST extends Node {
       this.right = node.right;
     }
   }
+
+  traversalPreOrder() {
+    return [].concat(
+      this.data,
+      this.left ? this.left.traversalPreOrder() : [],
+      this.right ? this.right.traversalPreOrder() : []
+    );
+  }
+
+  traversalInOrder() {
+    return [].concat(
+      this.left ? this.left.traversalInOrder() : [],
+      this.data,
+      this.right ? this.right.traversalInOrder() : []
+    );
+  }
+
+  traversalPostOrder() {
+    return [].concat(
+      this.left ? this.left.traversalPostOrder() : [],
+      this.right ? this.right.traversalPostOrder() : [],
+      this.data
+    );
+  }
+
+  traversalLevelOrder() {
+    throw new Error('Is not emplemented yet');
+    return [];
+  }
 }
 
 module.exports = BST;

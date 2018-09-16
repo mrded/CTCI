@@ -4,6 +4,7 @@ const insertSpec = require('./insert');
 const searchSpec = require('./search');
 const deleteSpec = require('./delete');
 const minMaxSpec = require('./min-max');
+const traversalSpec = require('./traversal');
 
 describe("Binary search tree", () => {
   it('new', () => {
@@ -18,4 +19,5 @@ describe("Binary search tree", () => {
   searchSpec();
   deleteSpec();
   minMaxSpec();
+  traversalSpec();
 });
