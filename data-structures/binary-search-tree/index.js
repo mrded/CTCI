@@ -97,6 +97,13 @@ class BST extends Node {
 
     return output;
   }
+
+  height() {
+    return Math.max(
+      this.left ? this.left.height() : -1,
+      this.right ? this.right.height() : -1
+    ) + 1;
+  }
 }
 
 module.exports = BST;
