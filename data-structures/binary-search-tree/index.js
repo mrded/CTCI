@@ -30,7 +30,7 @@ function _delete(node, data) {
       const min = node.right.min();
 
       node.data = min.data;
-      node.right.delete(min.data);
+      node.right = _delete(node.right, min.data);
     }
   }
 
