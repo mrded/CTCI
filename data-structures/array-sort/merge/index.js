@@ -1,7 +1,5 @@
 const merge = (one, two) => {
   const output = new Array(one.length + two.length);
-  console.log('one', one);
-  console.log('two', two);
 
   let oneX = 0;
   let twoX = 0;
@@ -19,25 +17,34 @@ const merge = (one, two) => {
     x++;
   }
 
-  for (; oneX < one.length; oneX++ && x++) {
+  while (oneX < one.length) {
     output[x] = one[oneX];
+    oneX++;
+    x++;
   }
 
-  for (; twoX < two.length; twoX++ && x++) {
+  while (twoX < two.length) {
     output[x] = two[twoX];
+    twoX++;
+    x++;
   }
 
   return output;
 }
 
+const sort = (array) => {
+  if (array.length <= 1) return array;
 
+  const middle = Math.round((array.length-1) / 2);
 
-const foo = merge([1, 3, 5, 7, 9], [2, 4, 6, 8]);
+  const one = array.slice(0, middle);
+  const two = array.slice(middle, array.length);
 
-console.log('result -> ', foo)
+  return merge(sort(one), sort(two));
+}
 
 module.exports = function(array) {
   const output = array.slice();
 
-  return output;
+  return sort(output);
 }
